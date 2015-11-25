@@ -1,8 +1,8 @@
 {
   "name": "scola-validator",
   "version": "1.0.0",
-  "description": "Validate incoming data",
-  "keywords": ["validation", "validator"],
+  "description": "Data Validation",
+  "keywords": ["data", "validation"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scola84/node-validator.git"
