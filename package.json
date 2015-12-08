@@ -1,5 +1,5 @@
 {
-  "name": "scola-validator",
+  "name": "@scola/validator",
   "version": "1.0.0",
   "description": "Data Validation",
   "keywords": ["data", "validation"],
