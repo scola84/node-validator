@@ -13,7 +13,7 @@ export default class ArrayCheck extends Check {
 
   check(value, options = {}) {
     if (!Array.isArray(value)) {
-      return this._reason('type');
+      return this._reason(false);
     }
 
     if (!this._with) {

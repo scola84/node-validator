@@ -20,7 +20,7 @@ export default class DateCheck extends RangeCheck {
 
   check(value, options = {}) {
     if (typeof value !== 'string') {
-      return this._reason('type');
+      return this._reason(false);
     }
 
     value = this._i18n.date().parse(value, this._format,
@@ -39,7 +39,7 @@ export default class DateCheck extends RangeCheck {
 
   _reason(reason, options = {}) {
     return {
-      date: reason || {
+      date: reason !== null ? reason : {
         format: this._i18n
           .date()
           .moment(options.locale, options.timezone)
@@ -57,7 +57,7 @@ export default class DateCheck extends RangeCheck {
 
     if (min && max) {
       return {
-        minmax: {
+        range: {
           min,
           max
         }

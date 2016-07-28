@@ -15,10 +15,7 @@ export default function formatGuiError(string, error, callback) {
     });
 
     type = Object.keys(error[field]).pop();
-
-    if (type === 'required' || type === 'strict') {
-      text += string.format(prefix + type);
-    }
+    text += string.format(prefix + 'field.' + type);
 
     if (typeof error[field][type] === 'string') {
       text += string.format(prefix + 'check.' +

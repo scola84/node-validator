@@ -12,7 +12,7 @@ export default class Strict extends Rule {
 
     Object.keys(copy).forEach((field) => {
       errors[field] = {
-        strict: false
+        strict: true
       };
     });
   }

@@ -10,7 +10,7 @@ export default function formatApiError(error) {
   Object.keys(error).forEach((field) => {
     reason = Object.keys(error[field]).pop();
     value = JSON.stringify(error[field][reason]);
-    text += `${field}=${reason}:${value};`;
+    text += field + '=' + reason + ':' + value + ';';
   });
 
   return text;

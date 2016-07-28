@@ -33,7 +33,7 @@ export default class RangeCheck extends Check {
   _createRange() {
     if (this._min && this._max) {
       return {
-        minmax: {
+        range: {
           min: this._min,
           max: this._max
         }

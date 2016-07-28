@@ -5,7 +5,7 @@ export default class IntegerCheck extends RangeCheck {
     value = Number(value);
 
     if (!Number.isInteger(value)) {
-      return this._reason('type');
+      return this._reason(false);
     }
 
     if (this._checkRange(value) !== true) {

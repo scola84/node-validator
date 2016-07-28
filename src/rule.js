@@ -77,7 +77,7 @@ export default class Rule {
     if (this._empty(value)) {
       if (this._required) {
         errors[this._field] = {
-          required: false
+          required: true
         };
       }
 

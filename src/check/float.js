@@ -15,7 +15,7 @@ export default class FloatCheck extends RangeCheck {
     value = this._i18n.number().parse(value, options.locale);
 
     if (Number.isNaN(value)) {
-      return this._reason('type');
+      return this._reason(false);
     }
 
     if (this._checkRange(value) !== true) {
