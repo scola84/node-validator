@@ -75,25 +75,20 @@ export default class Rule {
     const value = get(object, this._field);
 
     if (this._empty(value)) {
-      if (!this._required) {
-        return true;
+      if (this._required) {
+        errors[this._field] = {
+          required: false
+        };
       }
 
-      errors[this._field] = {
-        required: false
-      };
-
-      return false;
+      return;
     }
 
     const result = this._check.check(value, options);
 
     if (result !== true) {
       errors[this._field] = result;
-      return false;
     }
-
-    return true;
   }
 
   _empty(value) {

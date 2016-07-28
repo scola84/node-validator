@@ -67,12 +67,11 @@ export default class Validator {
 
   validate(object, options) {
     const errors = {};
-    let count = 0;
 
     this._rules.forEach((rule) => {
-      count += rule.check(object, options, errors) === false ? 1 : 0;
+      rule.check(object, options, errors);
     });
 
-    return count > 0 ? errors : null;
+    return Object.keys(errors).length === 0 ? null : errors;
   }
 }
