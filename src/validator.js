@@ -7,6 +7,7 @@ import IntegerCheck from './check/integer';
 import RegExpCheck from './check/regexp';
 import StringCheck from './check/string';
 
+import Error from './error';
 import Rule from './rule';
 import Strict from './strict';
 
@@ -72,6 +73,7 @@ export default class Validator {
       rule.check(object, options, errors);
     });
 
-    return Object.keys(errors).length === 0 ? null : errors;
+    return Object.keys(errors).length === 0 ?
+      null : new Error(errors);
   }
 }

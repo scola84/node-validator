@@ -3,7 +3,7 @@ export default {
     validator: {
       fields: 'Niet alle velden zijn correct ingevuld.',
       field: {
-        begin: ' Het veld "{field}" moet ',
+        begin: 'Het veld "{field}" moet ',
         end: '.',
         required: 'een waarde hebben',
         strict: 'geen waarde hebben',
