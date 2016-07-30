@@ -41,12 +41,13 @@ export default class ValidatorError extends Error {
       string.data(data);
     }
 
+    let text = '';
     let error = null;
     let type = null;
     let detail = null;
 
     return Object.keys(this._errors).map((field) => {
-      let text = '';
+      text = '';
       error = this._errors[field];
 
       text += string.format(prefix + 'field.begin', {
