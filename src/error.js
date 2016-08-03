@@ -24,7 +24,7 @@ export default class ValidatorError extends Error {
 
   _raw() {
     return Object.keys(this._errors).map((field) => {
-      this._rawError(field);
+      return this._rawError(field);
     }).join('&');
   }
 
