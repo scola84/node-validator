@@ -6,7 +6,7 @@ export default class ArrayCheck extends Check {
     this._with = null;
   }
 
-  with(check) {
+  with(...check) {
     this._with = check;
     return this;
   }
@@ -23,8 +23,10 @@ export default class ArrayCheck extends Check {
     let result = null;
 
     return value.every((entry) => {
-      result = this._with.check(entry, options);
-      return result === true;
+      return this._with.some((check) => {
+        result = check.check(entry, options);
+        return result === true;
+      });
     }) ? true : this._reason(result);
   }
 
