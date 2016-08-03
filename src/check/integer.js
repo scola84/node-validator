@@ -2,8 +2,6 @@ import RangeCheck from './range';
 
 export default class IntegerCheck extends RangeCheck {
   check(value) {
-    value = Number(value);
-
     if (!Number.isInteger(value)) {
       return this._reason(false);
     }
