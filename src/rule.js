@@ -1,4 +1,4 @@
-import {get } from '@scola/deep';
+import get from 'lodash-es/get';
 
 export default class Rule {
   constructor() {
