@@ -1,31 +1,42 @@
 export default {
   scola: {
-    validator: {
-      fields: 'Niet alle velden zijn correct ingevuld.',
+    error: {
       field: {
-        begin: 'Het veld "{field}" moet ',
+        begin: 'The field "{field}" should ',
         end: '.',
-        required: 'een waarde hebben',
-        strict: 'geen waarde hebben',
-        date: 'een datum zijn',
-        email: 'een e-mailadres zijn',
-        integer: 'een getal zijn'
+        required: 'have a value',
+        strict: 'not have a value',
+        date: 'be a date',
+        email: 'be an e-mail address',
+        float: 'be a decimal',
+        integer: 'be an integer',
+        string: 'a string'
       },
       check: {
         date: {
-          format: ' in het formaat {format}',
-          min: ' groter dan of gelijk aan {min}',
-          max: ' kleiner dan of gelijk aan {max}',
-          range: ' tussen {range.min} en {range.max}'
+          format: ' formatted as {format}',
+          min: ' greater than or equal to {min}',
+          max: ' less than or equal to {max}',
+          range: ' between {range.min} and {range.max}'
         },
         email: {
-          domain: ' (domein is ongeldig)',
-          local: ' (naam is ongeldig)'
+          domain: ' (domain is invalid)',
+          local: ' (name is invalid)'
+        },
+        float: {
+          min: ' greater than or equal to {min}',
+          max: ' less than or equal to {max}',
+          range: ' between {range.min} and {range.max}'
         },
         integer: {
-          min: ' groter dan of gelijk aan {min}',
-          max: ' kleiner dan of gelijk aan {max}',
-          range: ' tussen {range.min} en {range.max}'
+          min: ' greater than or equal to {min}',
+          max: ' less than or equal to {max}',
+          range: ' between {range.min} and {range.max}'
+        },
+        string: {
+          min: ' longer than or equal to {min} characters',
+          max: ' shorter than or equal to {max} characters',
+          range: ' between {range.min} and {range.max} characters'
         }
       }
     }

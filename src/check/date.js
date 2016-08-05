@@ -18,27 +18,29 @@ export default class DateCheck extends RangeCheck {
     return this;
   }
 
-  check(value, options = {}) {
-    if (typeof value !== 'string') {
-      return this._reason(false);
+  check(field, value, errors, options) {
+    if (isNaN(value)) {
+      if (!this._i18n) {
+        return this._error(field, false, errors);
+      }
+
+      value = this._i18n.date().parse(String(value), this._format,
+        options.locale, options.timezone);
     }
 
-    value = this._i18n.date().parse(value, this._format,
-      options.locale, options.timezone);
-
-    if (!value) {
-      return this._reason(null, options);
+    if (value === null) {
+      return this._error(field, null, errors, options);
     }
 
     if (this._checkRange(value) !== true) {
-      return this._reason(this._createRange(options));
+      return this._error(field, this._createRange(options), errors);
     }
 
-    return true;
+    return Number(value);
   }
 
-  _reason(reason, options = {}) {
-    return {
+  _error(field, reason, errors, options = {}) {
+    errors[field] = {
       date: reason !== null ? reason : {
         format: this._i18n
           .date()
@@ -47,6 +49,8 @@ export default class DateCheck extends RangeCheck {
           .longDateFormat(this._format)
       }
     };
+
+    return false;
   }
 
   _createRange(options = {}) {

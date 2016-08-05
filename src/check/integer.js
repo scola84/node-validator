@@ -1,21 +1,25 @@
 import RangeCheck from './range';
 
 export default class IntegerCheck extends RangeCheck {
-  check(value) {
+  check(field, value, errors) {
+    value = Number(value);
+
     if (!Number.isInteger(value)) {
-      return this._reason(false);
+      return this._error(field, false, errors);
     }
 
     if (this._checkRange(value) !== true) {
-      return this._reason(this._createRange());
+      return this._error(name, this._createRange(), errors);
     }
 
-    return true;
+    return value;
   }
 
-  _reason(reason) {
-    return {
+  _error(field, reason, errors) {
+    errors[field] = {
       integer: reason
     };
+
+    return false;
   }
 }

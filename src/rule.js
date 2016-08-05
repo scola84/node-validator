@@ -1,4 +1,5 @@
 import get from 'lodash-es/get';
+import set from 'lodash-es/set';
 
 export default class Rule {
   constructor() {
@@ -71,7 +72,7 @@ export default class Rule {
     return this._check;
   }
 
-  check(object, options, errors) {
+  check(object, errors, options) {
     const value = get(object, this._field);
 
     if (this._empty(value)) {
@@ -84,10 +85,10 @@ export default class Rule {
       return;
     }
 
-    const result = this._check.check(value, options);
+    const result = this._check.check(this._field, value, errors, options);
 
-    if (result !== true) {
-      errors[this._field] = result;
+    if (result !== false && options.cast === true) {
+      set(object, this._field, result);
     }
   }
 

@@ -1,56 +1,46 @@
-import data from './i18n/data';
-
 export default class ValidatorError extends Error {
-  constructor(errors) {
+  constructor(errors, prefix = 'scola.error.') {
     super();
-    this._errors = errors;
+
+    this.errors = errors;
+    this.prefix = prefix;
+    this.message = this._raw();
   }
 
-  get message() {
-    return this._raw();
-  }
-
-  toObject() {
-    return this._errors;
-  }
-
-  toString(i18n, fieldPrefix) {
+  toString(i18n, prefix, fieldPrefix) {
     if (typeof i18n === 'undefined') {
-      return this._raw();
+      return 'Error: ' + this._raw();
     }
 
-    return this._format(i18n, fieldPrefix);
+    return this._format(i18n, prefix, fieldPrefix);
   }
 
   _raw() {
-    return Object.keys(this._errors).map((field) => {
+    return Object.keys(this.errors).map((field) => {
       return this._rawError(field);
     }).join('&');
   }
 
-  _format(i18n, fieldPrefix) {
-    const prefix = 'scola.validator.';
+  _format(i18n, prefix, fieldPrefix) {
     const string = i18n.string();
 
-    if (!string.get(prefix.slice(0, -1), 'en')) {
-      string.data(data);
-    }
-
-    return Object.keys(this._errors).map((field) => {
+    return Object.keys(this.errors).map((field) => {
       return this._formatError(string, field, prefix, fieldPrefix);
     }).join(' ');
   }
 
   _rawError(field) {
-    const reason = Object.keys(this._errors[field]).pop();
-    const value = JSON.stringify(this._errors[field][reason]);
+    const reason = Object.keys(this.errors[field]).pop();
+    const value = JSON.stringify(this.errors[field][reason]);
 
     return field + '=' + reason + ':' + value;
   }
 
   _formatError(string, field, prefix, fieldPrefix) {
+    prefix = prefix || this.prefix;
+
     let text = '';
-    const error = this._errors[field];
+    const error = this.errors[field];
 
     text += string.format(prefix + 'field.begin', {
       field: string.format(fieldPrefix + field)

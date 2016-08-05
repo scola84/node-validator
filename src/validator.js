@@ -6,8 +6,7 @@ import FloatCheck from './check/float';
 import IntegerCheck from './check/integer';
 import RegExpCheck from './check/regexp';
 import StringCheck from './check/string';
-
-import Error from './error';
+import ValidatorError from './helper/error';
 import Rule from './rule';
 import Strict from './strict';
 
@@ -66,14 +65,14 @@ export default class Validator {
     return new StringCheck().validator(this);
   }
 
-  validate(object, options) {
+  validate(object, options = {}) {
     const errors = {};
 
     this._rules.forEach((rule) => {
-      rule.check(object, options, errors);
+      rule.check(object, errors, options);
     });
 
     return Object.keys(errors).length === 0 ?
-      null : new Error(errors);
+      null : new ValidatorError(errors);
   }
 }

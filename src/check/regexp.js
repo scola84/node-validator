@@ -11,14 +11,18 @@ export default class RegExpCheck extends Check {
     return this;
   }
 
-  check(value) {
-    return String(value).match(this._match) ?
-      true : this._reason(this._match.source);
+  check(field, value, errors) {
+    value = String(value);
+
+    return value.match(this._match) ?
+      value : this._error(field, this._match.source, errors);
   }
 
-  _reason(reason) {
-    return {
+  _error(field, reason, errors) {
+    errors[field] = {
       regexp: reason
     };
+
+    return false;
   }
 }

@@ -11,36 +11,38 @@ export default class EmailCheck extends RangeCheck {
     return this;
   }
 
-  check(value) {
+  check(field, value, errors) {
     if (typeof value !== 'string') {
-      return this._reason(false);
+      return this._error(field, false, errors);
     }
 
     if (this._checkRange(value.length) !== true) {
-      return this._reason(this._createRange());
+      return this._error(field, this._createRange(), errors);
     }
 
     const [local, domain] = value.split('@');
 
     if (!local) {
-      return this._reason('local');
+      return this._error(field, 'local', errors);
     }
 
     if (!this._domain(domain)) {
-      return this._reason('domain');
+      return this._error(field, 'domain', errors);
     }
 
     if (this._domains && this._domains.indexOf(domain) === -1) {
-      return this._reason(this._domains.join(','));
+      return this._error(field, this._domains.join(','), errors);
     }
 
-    return true;
+    return value;
   }
 
-  _reason(reason) {
-    return {
+  _error(field, reason, errors) {
+    errors[field] = {
       email: reason
     };
+
+    return false;
   }
 
   _domain(domain) {

@@ -11,20 +11,22 @@ export default class EnumCheck extends Check {
     return this;
   }
 
-  check(value) {
+  check(field, value, errors) {
     if (!Array.isArray(value)) {
       return this._values.indexOf(value) !== -1 ?
-        true : this._reason(this._values.join(','));
+        true : this._error(field, this._values.join(','), errors);
     }
 
     return value.every((item) => {
       return this._values.indexOf(item) !== -1;
-    }) ? true : this._reason(this._values.join(','));
+    }) ? value : this._error(field, this._values.join(','), errors);
   }
 
-  _reason(reason) {
-    return {
+  _error(field, reason, errors) {
+    errors[field] = {
       enum: reason
     };
+
+    return false;
   }
 }

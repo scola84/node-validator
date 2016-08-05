@@ -2,7 +2,7 @@ import Rule from './rule';
 import flatten from './helper/flatten';
 
 export default class Strict extends Rule {
-  check(object, options, errors) {
+  check(object, errors) {
     const copy = flatten(object);
     const rules = this._validator.rules();
 

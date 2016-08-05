@@ -11,28 +11,28 @@ export default class ArrayCheck extends Check {
     return this;
   }
 
-  check(value, options = {}) {
+  check(field, value, errors, options = {}) {
     if (!Array.isArray(value)) {
-      return this._reason(false);
+      return this._error(field, false, errors);
     }
 
     if (!this._with) {
       return true;
     }
 
-    let result = null;
-
-    return value.every((entry) => {
+    return value.every((entry, index) => {
       return this._with.some((check) => {
-        result = check.check(entry, options);
-        return result === true;
+        value[index] = check.check(field, entry, errors, options);
+        return typeof errors[field] === 'undefined';
       });
-    }) ? true : this._reason(result);
+    }) ? value : false;
   }
 
-  _reason(reason) {
-    return {
+  _error(field, reason, errors) {
+    errors[field] = {
       array: reason
     };
+
+    return false;
   }
 }
