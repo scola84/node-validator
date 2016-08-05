@@ -6,7 +6,7 @@ import FloatCheck from './check/float';
 import IntegerCheck from './check/integer';
 import RegExpCheck from './check/regexp';
 import StringCheck from './check/string';
-import ValidatorError from './helper/error';
+import ValidatorError from './error';
 import Rule from './rule';
 import Strict from './strict';
 
