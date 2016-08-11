@@ -3,14 +3,7 @@ import RangeCheck from './range';
 export default class DateCheck extends RangeCheck {
   constructor() {
     super();
-
-    this._i18n = null;
     this._format = null;
-  }
-
-  i18n(i18n) {
-    this._i18n = i18n;
-    return this;
   }
 
   format(format) {
@@ -20,11 +13,11 @@ export default class DateCheck extends RangeCheck {
 
   check(field, value, errors, options) {
     if (isNaN(value)) {
-      if (!this._i18n) {
+      if (!options.i18n) {
         return this._error(field, false, errors);
       }
 
-      value = this._i18n.date().parse(String(value), this._format,
+      value = options.i18n.date().parse(String(value), this._format,
         options.locale, options.timezone);
     }
 
@@ -42,7 +35,7 @@ export default class DateCheck extends RangeCheck {
   _error(field, reason, errors, options = {}) {
     errors[field] = {
       date: reason !== null ? reason : {
-        format: this._i18n
+        format: options.i18n
           .date()
           .moment(options.locale, options.timezone)
           .localeData()
@@ -54,9 +47,9 @@ export default class DateCheck extends RangeCheck {
   }
 
   _createRange(options = {}) {
-    const min = this._min ? this._i18n.date().format(this._min,
+    const min = this._min ? options.i18n.date().format(this._min,
       this._format, options.locale, options.timezone) : null;
-    const max = this._max ? this._i18n.date().format(this._max,
+    const max = this._max ? options.i18n.date().format(this._max,
       this._format, options.locale, options.timezone) : null;
 
     if (min && max) {

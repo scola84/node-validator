@@ -7,12 +7,12 @@ export default class ValidatorError extends Error {
     this.message = this._raw();
   }
 
-  toString(i18n, prefix, fieldPrefix) {
-    if (typeof i18n === 'undefined') {
+  toString(string, prefix, fieldPrefix) {
+    if (typeof string === 'undefined') {
       return 'Error: ' + this._raw();
     }
 
-    return this._format(i18n, prefix, fieldPrefix);
+    return this._format(string, prefix, fieldPrefix);
   }
 
   _raw() {
@@ -21,9 +21,7 @@ export default class ValidatorError extends Error {
     }).join('&');
   }
 
-  _format(i18n, prefix, fieldPrefix) {
-    const string = i18n.string();
-
+  _format(string, prefix, fieldPrefix) {
     return Object.keys(this.errors).map((field) => {
       return this._formatError(string, field, prefix, fieldPrefix);
     }).join(' ');
