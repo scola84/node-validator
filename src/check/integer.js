@@ -9,7 +9,7 @@ export default class IntegerCheck extends RangeCheck {
     }
 
     if (this._checkRange(value) !== true) {
-      return this._error(name, this._createRange(), errors);
+      return this._error(field, this._createRange(), errors);
     }
 
     return value;
