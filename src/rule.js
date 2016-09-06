@@ -9,21 +9,21 @@ export default class Rule {
     this._check = null;
   }
 
-  validator(validator) {
-    if (typeof validator === 'undefined') {
+  validator(value) {
+    if (typeof value === 'undefined') {
       return this._validator;
     }
 
-    this._validator = validator;
+    this._validator = value;
     return this;
   }
 
-  field(field) {
-    if (typeof field === 'undefined') {
+  field(value) {
+    if (typeof value === 'undefined') {
       return this._field;
     }
 
-    this._field = field;
+    this._field = value;
     return this;
   }
 

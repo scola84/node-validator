@@ -3,17 +3,17 @@ export default class Check {
     this._validator = null;
   }
 
-  validator(validator) {
-    if (typeof validator === 'undefined') {
+  validator(value) {
+    if (typeof value === 'undefined') {
       return this._validator;
     }
 
-    this._validator = validator;
+    this._validator = value;
     return this;
   }
 
-  field(field) {
-    return this._validator.field(field);
+  field(value) {
+    return this._validator.field(value);
   }
 
   check() {

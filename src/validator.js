@@ -20,10 +20,10 @@ export default class Validator {
     return this;
   }
 
-  field(field) {
+  field(value) {
     const rule = new Rule()
       .validator(this)
-      .field(field);
+      .field(value);
 
     this._rules.push(rule);
     return rule;

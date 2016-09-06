@@ -6,8 +6,8 @@ export default class RegExpCheck extends Check {
     this._match = null;
   }
 
-  match(match) {
-    this._match = match;
+  match(value) {
+    this._match = value;
     return this;
   }
 

@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash-es/isPlainObject';
 
 export default function flatten(source, target, prefix) {
   prefix = prefix ? prefix + '.' : '';

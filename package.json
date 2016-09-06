@@ -8,10 +8,10 @@
   "main": "./dist/validator.js",
   "jsnext:main": "./index.js",
   "dependencies": {
-    "lodash-es": "^4.14.1"
+    "lodash-es": "^4.15.0"
   },
   "devDependencies": {
-    "rollup": "^0.26.3"
+    "rollup": "^0.34.13"
   },
   "scripts": {
     "build": "rollup -i ./index.js -o ./dist/validator.js -f cjs"
