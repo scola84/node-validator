@@ -7,7 +7,7 @@ export default class ValidatorError extends Error {
     this.message = this._raw();
   }
 
-  toString(string, prefix, fieldPrefix) {
+  toString(string, prefix, fieldPrefix = '') {
     if (typeof string === 'undefined') {
       return 'Error: ' + this._raw();
     }
