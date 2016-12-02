@@ -1,10 +1,13 @@
-export default class ValidatorError extends Error {
+import { ScolaError } from '@scola/error';
+
+export default class ValidatorError extends ScolaError {
   constructor(errors, prefix = 'scola.error.') {
-    super();
+    super('', prefix);
 
     this.errors = errors;
-    this.prefix = prefix;
     this.message = this._raw();
+
+    this._parse();
   }
 
   toString(string, prefix, fieldPrefix = '') {
@@ -16,9 +19,10 @@ export default class ValidatorError extends Error {
   }
 
   _raw() {
-    return Object.keys(this.errors).map((field) => {
-      return this._rawError(field);
-    }).join('&');
+    return '400 invalid_input ' +
+      Object.keys(this.errors).map((field) => {
+        return this._rawError(field);
+      }).join('&');
   }
 
   _format(string, prefix, fieldPrefix) {
