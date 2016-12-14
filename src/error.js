@@ -1,4 +1,4 @@
-import { ScolaError } from '@scola/core';
+import { ScolaError } from '@scola/error';
 
 export default class ValidatorError extends ScolaError {
   constructor(errors, prefix = 'scola.error.') {
