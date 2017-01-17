@@ -3,8 +3,8 @@ export default class Check {
     this._validator = null;
   }
 
-  validator(value) {
-    if (typeof value === 'undefined') {
+  validator(value = null) {
+    if (value === null) {
       return this._validator;
     }
 

@@ -6,7 +6,11 @@ export default class DateCheck extends RangeCheck {
     this._format = null;
   }
 
-  format(value) {
+  format(value = null) {
+    if (value === null) {
+      return this._format;
+    }
+
     this._format = value;
     return this;
   }

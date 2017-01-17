@@ -7,6 +7,10 @@ export default class ArrayCheck extends Check {
   }
 
   with(...check) {
+    if (check.length === 0) {
+      return this._with;
+    }
+
     this._with = check;
     return this;
   }

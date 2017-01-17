@@ -6,7 +6,11 @@ export default class RegExpCheck extends Check {
     this._match = null;
   }
 
-  match(value) {
+  match(value = null) {
+    if (value === null) {
+      return this._match;
+    }
+
     this._match = value;
     return this;
   }

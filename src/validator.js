@@ -15,9 +15,8 @@ export default class Validator {
     this._rules = [];
   }
 
-  strict() {
-    this._rules.push(new Strict().validator(this));
-    return this;
+  rules() {
+    return this._rules;
   }
 
   field(value) {
@@ -29,8 +28,12 @@ export default class Validator {
     return rule;
   }
 
-  rules() {
-    return this._rules;
+  strict() {
+    const rule = new Strict()
+      .validator(this);
+
+    this._rules.push(rule);
+    return this;
   }
 
   array() {
@@ -65,14 +68,21 @@ export default class Validator {
     return new StringCheck().validator(this);
   }
 
-  validate(object, options = {}) {
+  validate(object, options = {}, callback = () => {}) {
+    if (typeof options === 'function') {
+      callback = options;
+      options = {};
+    }
+
     const errors = {};
 
     this._rules.forEach((rule) => {
       rule.check(object, errors, options);
     });
 
-    return Object.keys(errors).length === 0 ?
+    const error = Object.keys(errors).length === 0 ?
       null : new ValidatorError(errors);
+
+    callback(error);
   }
 }

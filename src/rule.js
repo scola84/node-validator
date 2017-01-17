@@ -9,8 +9,8 @@ export default class Rule {
     this._check = null;
   }
 
-  validator(value) {
-    if (typeof value === 'undefined') {
+  validator(value = null) {
+    if (value === null) {
       return this._validator;
     }
 
@@ -18,8 +18,8 @@ export default class Rule {
     return this;
   }
 
-  field(value) {
-    if (typeof value === 'undefined') {
+  field(value = null) {
+    if (value === null) {
       return this._field;
     }
 

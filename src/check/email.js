@@ -6,7 +6,11 @@ export default class EmailCheck extends RangeCheck {
     this._domains = null;
   }
 
-  domains(value) {
+  domains(value = null) {
+    if (value === null) {
+      return this._domains;
+    }
+
     this._domains = value;
     return this;
   }

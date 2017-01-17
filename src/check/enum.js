@@ -6,7 +6,11 @@ export default class EnumCheck extends Check {
     this._values = null;
   }
 
-  values(value) {
+  values(value = null) {
+    if (value === null) {
+      return this._values;
+    }
+
     this._values = value;
     return this;
   }

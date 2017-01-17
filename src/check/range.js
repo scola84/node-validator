@@ -8,12 +8,20 @@ export default class RangeCheck extends Check {
     this._max = null;
   }
 
-  min(value) {
+  min(value = null) {
+    if (value === null) {
+      return this._min;
+    }
+
     this._min = value;
     return this;
   }
 
-  max(value) {
+  max(value = null) {
+    if (value === null) {
+      return this._max;
+    }
+
     this._max = value;
     return this;
   }
