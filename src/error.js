@@ -1,8 +1,8 @@
 import { ScolaError } from '@scola/error';
 
 export default class ValidatorError extends ScolaError {
-  constructor(errors, prefix = 'scola.error.') {
-    super('', prefix);
+  constructor(errors) {
+    super('');
 
     this.errors = errors;
     this.message = this._raw();
@@ -10,12 +10,12 @@ export default class ValidatorError extends ScolaError {
     this._parse();
   }
 
-  toString(string = null, prefix = null, fieldPrefix = '') {
+  toString(string = null, fieldPrefix = '', prefix = 'scola.error.') {
     if (string === null) {
       return 'Error: ' + this._raw();
     }
 
-    return this._format(string, prefix, fieldPrefix);
+    return this._format(string, fieldPrefix, prefix);
   }
 
   _raw() {
@@ -25,9 +25,9 @@ export default class ValidatorError extends ScolaError {
       }).join('&');
   }
 
-  _format(string, prefix, fieldPrefix) {
+  _format(string, fieldPrefix, prefix) {
     return Object.keys(this.errors).map((field) => {
-      return this._formatError(string, field, prefix, fieldPrefix);
+      return this._formatError(string, field, fieldPrefix, prefix);
     }).join(' ');
   }
 
@@ -38,9 +38,7 @@ export default class ValidatorError extends ScolaError {
     return field + '=' + reason + ':' + value;
   }
 
-  _formatError(string, field, prefix, fieldPrefix) {
-    prefix = prefix || this.prefix;
-
+  _formatError(string, field, fieldPrefix, prefix) {
     let text = '';
     const error = this.errors[field];
 

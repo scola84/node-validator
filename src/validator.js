@@ -37,31 +37,38 @@ export default class Validator {
   }
 
   array() {
-    return new ArrayCheck().validator(this);
+    return new ArrayCheck()
+      .validator(this);
   }
 
   date() {
-    return new DateCheck().validator(this);
+    return new DateCheck()
+      .validator(this);
   }
 
   email() {
-    return new EmailCheck().validator(this);
+    return new EmailCheck()
+      .validator(this);
   }
 
   enum() {
-    return new EnumCheck().validator(this);
+    return new EnumCheck()
+      .validator(this);
   }
 
   float() {
-    return new FloatCheck().validator(this);
+    return new FloatCheck()
+      .validator(this);
   }
 
   integer() {
-    return new IntegerCheck().validator(this);
+    return new IntegerCheck()
+      .validator(this);
   }
 
   regexp() {
-    return new RegExpCheck().validator(this);
+    return new RegExpCheck()
+      .validator(this);
   }
 
   string() {
