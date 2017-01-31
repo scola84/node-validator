@@ -72,7 +72,8 @@ export default class Validator {
   }
 
   string() {
-    return new StringCheck().validator(this);
+    return new StringCheck()
+      .validator(this);
   }
 
   validate(object, options = {}, callback = () => {}) {
