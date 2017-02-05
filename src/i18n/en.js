@@ -1,17 +1,6 @@
 export default {
   scola: {
     error: {
-      field: {
-        begin: 'The field "{field}" should ',
-        end: '.',
-        required: 'have a value',
-        strict: 'not have a value',
-        date: 'be a date',
-        email: 'be an e-mail address',
-        float: 'be a decimal',
-        integer: 'be an integer',
-        string: 'a string'
-      },
       check: {
         date: {
           format: ' formatted as {format}',
@@ -38,7 +27,19 @@ export default {
           max: ' shorter than or equal to {max} characters',
           range: ' between {range.min} and {range.max} characters'
         }
-      }
+      },
+      field: {
+        begin: 'The field "{field}" should ',
+        end: '.',
+        required: 'have a value',
+        strict: 'not have a value',
+        date: 'be a date',
+        email: 'be an e-mail address',
+        float: 'be a decimal',
+        integer: 'be an integer',
+        string: 'a string'
+      },
+      invalid_input: 'The input is invalid.'
     }
   }
 };

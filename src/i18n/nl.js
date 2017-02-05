@@ -1,17 +1,6 @@
 export default {
   scola: {
     error: {
-      field: {
-        begin: 'Het veld "{field}" moet ',
-        end: '.',
-        required: 'een waarde hebben',
-        strict: 'geen waarde hebben',
-        date: 'een datum zijn',
-        email: 'een e-mailadres zijn',
-        float: 'een decimaal getal zijn',
-        integer: 'een geheel getal zijn',
-        string: 'een tekenreeks zijn'
-      },
       check: {
         date: {
           format: ' in het formaat {format}',
@@ -38,7 +27,19 @@ export default {
           max: ' korter dan of gelijk aan {max} tekens',
           range: ' tussen {range.min} en {range.max} tekens'
         }
-      }
+      },
+      field: {
+        begin: 'Het veld "{field}" moet ',
+        end: '.',
+        required: 'een waarde hebben',
+        strict: 'geen waarde hebben',
+        date: 'een datum zijn',
+        email: 'een e-mailadres zijn',
+        float: 'een decimaal getal zijn',
+        integer: 'een geheel getal zijn',
+        string: 'een tekenreeks zijn'
+      },
+      invalid_input: 'De invoer is ongeldig.'
     }
   }
 };
