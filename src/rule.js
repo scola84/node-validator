@@ -6,6 +6,7 @@ export default class Rule {
     this._validator = null;
     this._field = null;
     this._required = false;
+    this._default = null;
     this._check = null;
   }
 
@@ -24,6 +25,15 @@ export default class Rule {
     }
 
     this._field = value;
+    return this;
+  }
+
+  default(value = null) {
+    if (value === null) {
+      return this._default;
+    }
+
+    this._default = value;
     return this;
   }
 
@@ -80,6 +90,8 @@ export default class Rule {
         errors[this._field] = {
           required: true
         };
+      } else if (this._default) {
+        set(object, this._field, this._default);
       }
 
       return;
