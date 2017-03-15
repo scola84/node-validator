@@ -6,6 +6,7 @@ export default class Rule {
     this._validator = null;
     this._field = null;
     this._required = false;
+    this._cast = false;
     this._default = null;
     this._check = null;
   }
@@ -28,12 +29,17 @@ export default class Rule {
     return this;
   }
 
-  default(value = null) {
+  default (value = null) {
     if (value === null) {
       return this._default;
     }
 
     this._default = value;
+    return this;
+  }
+
+  cast() {
+    this._cast = true;
     return this;
   }
 
@@ -99,7 +105,7 @@ export default class Rule {
 
     const result = this._check.check(this._field, value, errors, options);
 
-    if (result !== false && options.cast === true) {
+    if (result !== false && this._cast === true) {
       set(object, this._field, result);
     }
   }

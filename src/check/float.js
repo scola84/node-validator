@@ -1,9 +1,23 @@
 import RangeCheck from './range';
 
 export default class FloatCheck extends RangeCheck {
+  constructor() {
+    super();
+    this._number = null;
+  }
+
+  number(value = null) {
+    if (value === null) {
+      return this._number;
+    }
+
+    this._number = value;
+    return this;
+  }
+
   check(field, value, errors, options) {
-    value = options.i18n ?
-      options.i18n.number().parse(String(value), options.locale) : value;
+    value = this._number ?
+      this._number.parse(String(value), options.locale) : value;
 
     if (isNaN(value)) {
       return this._error(field, false, errors);
