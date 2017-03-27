@@ -39,7 +39,7 @@ export default class RangeCheck extends Check {
   }
 
   _createRange() {
-    if (this._min && this._max) {
+    if (this._min !== null && this._max !== null) {
       return {
         range: {
           min: this._min,
@@ -48,13 +48,13 @@ export default class RangeCheck extends Check {
       };
     }
 
-    if (this._min) {
+    if (this._min !== null) {
       return {
         min: this._min
       };
     }
 
-    if (this._max) {
+    if (this._max !== null) {
       return {
         max: this._max
       };

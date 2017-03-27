@@ -16,20 +16,22 @@ export default class ArrayCheck extends Check {
   }
 
   check(field, value, errors, options = {}) {
-    if (!Array.isArray(value)) {
+    if (Array.isArray(value) === false) {
       return this._error(field, false, errors);
     }
 
-    if (!this._with) {
+    if (Array.isArray(this._with) === false) {
       return true;
     }
 
-    return value.every((entry, index) => {
+    const valid = value.every((entry, index) => {
       return this._with.some((check) => {
         value[index] = check.check(field, entry, errors, options);
         return typeof errors[field] === 'undefined';
       });
-    }) ? value : false;
+    });
+
+    return valid === true ? value : false;
   }
 
   _error(field, reason, errors) {

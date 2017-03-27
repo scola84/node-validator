@@ -16,10 +16,10 @@ export default class FloatCheck extends RangeCheck {
   }
 
   check(field, value, errors, options) {
-    value = this._number ?
+    value = this._number !== null ?
       this._number.parse(String(value), options.locale) : value;
 
-    if (isNaN(value)) {
+    if (isNaN(value) === true) {
       return this._error(field, false, errors);
     }
 

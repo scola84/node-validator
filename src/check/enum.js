@@ -16,14 +16,17 @@ export default class EnumCheck extends Check {
   }
 
   check(field, value, errors) {
-    if (!Array.isArray(value)) {
+    if (Array.isArray(value) === false) {
       return this._values.indexOf(value) !== -1 ?
         true : this._error(field, this._values.join(','), errors);
     }
 
-    return value.every((item) => {
+    const valid = value.every((item) => {
       return this._values.indexOf(item) !== -1;
-    }) ? value : this._error(field, this._values.join(','), errors);
+    });
+
+    return valid === true ?
+      value : this._error(field, this._values.join(','), errors);
   }
 
   _error(field, reason, errors) {

@@ -18,7 +18,7 @@ export default class RegExpCheck extends Check {
   check(field, value, errors) {
     value = String(value);
 
-    return value.match(this._match) ?
+    return this._match.test(value) === true ?
       value : this._error(field, this._match.source, errors);
   }
 

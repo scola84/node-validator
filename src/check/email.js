@@ -3,6 +3,8 @@ import RangeCheck from './range';
 export default class EmailCheck extends RangeCheck {
   constructor() {
     super();
+    
+    this._regex = /^[a-z0-9\-\(\)]+$/i;
     this._domains = null;
   }
 
@@ -26,15 +28,19 @@ export default class EmailCheck extends RangeCheck {
 
     const [local, domain] = value.split('@');
 
-    if (!local) {
+    if (local.length === 0) {
       return this._error(field, 'local', errors);
     }
 
-    if (!this._domain(domain)) {
+    if (domain.length === 0 ||
+      this._valid(domain) === false) {
+
       return this._error(field, 'domain', errors);
     }
 
-    if (this._domains && this._domains.indexOf(domain) === -1) {
+    if (Array.isArray(this._domains) === true &&
+      this._domains.indexOf(domain) === -1) {
+
       return this._error(field, this._domains.join(','), errors);
     }
 
@@ -49,11 +55,11 @@ export default class EmailCheck extends RangeCheck {
     return false;
   }
 
-  _domain(domain) {
-    return domain ? domain.split('.').every((part) => {
-      return part.match(/^[a-z0-9\-\(\)]+$/i) &&
+  _valid(domain) {
+    return domain.split('.').every((part) => {
+      return this._regex.test(part) === true &&
         part[0] !== '-' &&
         part[part.length - 1] !== '-';
-    }) : false;
+    });
   }
 }

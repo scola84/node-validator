@@ -91,12 +91,12 @@ export default class Rule {
   check(object, errors, options) {
     const value = get(object, this._field);
 
-    if (this._empty(value)) {
-      if (this._required) {
+    if (this._empty(value) === true) {
+      if (this._required === true) {
         errors[this._field] = {
           required: true
         };
-      } else if (this._default) {
+      } else if (this._default !== null) {
         set(object, this._field, this._default);
       }
 
@@ -111,6 +111,8 @@ export default class Rule {
   }
 
   _empty(value) {
-    return value === null || typeof value === 'undefined' || value === '';
+    return typeof value === 'undefined' ||
+      value === null ||
+      value === '';
   }
 }

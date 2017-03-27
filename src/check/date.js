@@ -26,8 +26,8 @@ export default class DateCheck extends RangeCheck {
   }
 
   check(field, value, errors, options) {
-    if (isNaN(value)) {
-      if (!this._date) {
+    if (isNaN(value) === true) {
+      if (this._date === null) {
         return this._error(field, false, errors);
       }
 
@@ -39,7 +39,7 @@ export default class DateCheck extends RangeCheck {
       return this._error(field, null, errors, options);
     }
 
-    if (this._checkRange(value) !== true) {
+    if (this._checkRange(value) === false) {
       return this._error(field, this._createRange(options), errors);
     }
 
@@ -60,12 +60,15 @@ export default class DateCheck extends RangeCheck {
   }
 
   _createRange(options = {}) {
-    const min = this._min ? this._date.format(this._min,
-      this._format, options.locale, options.timezone) : null;
-    const max = this._max ? this._date.format(this._max,
-      this._format, options.locale, options.timezone) : null;
+    const min = this._min === null ? null :
+      this._date.format(this._min, this._format,
+        options.locale, options.timezone);
 
-    if (min && max) {
+    const max = this._max === null ? null :
+      this._date.format(this._max, this._format,
+        options.locale, options.timezone);
+
+    if (min !== null && max !== null) {
       return {
         range: {
           min,
@@ -74,13 +77,13 @@ export default class DateCheck extends RangeCheck {
       };
     }
 
-    if (min) {
+    if (min !== null) {
       return {
         min
       };
     }
 
-    if (max) {
+    if (max !== null) {
       return {
         max
       };
