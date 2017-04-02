@@ -1,4 +1,5 @@
 import ArrayCheck from './check/array';
+import CustomCheck from './check/custom';
 import DateCheck from './check/date';
 import EnumCheck from './check/enum';
 import EmailCheck from './check/email';
@@ -38,6 +39,11 @@ export default class Validator {
 
   array() {
     return new ArrayCheck()
+      .validator(this);
+  }
+
+  custom() {
+    return new CustomCheck()
       .validator(this);
   }
 

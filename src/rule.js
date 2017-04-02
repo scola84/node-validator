@@ -53,6 +53,11 @@ export default class Rule {
     return this._check;
   }
 
+  custom() {
+    this._check = this._validator.custom();
+    return this._check;
+  }
+
   date() {
     this._check = this._validator.date();
     return this._check;
@@ -89,7 +94,8 @@ export default class Rule {
   }
 
   check(object, errors, options) {
-    const value = get(object, this._field);
+    const value = this._field === '*' ?
+      object : get(object, this._field);
 
     if (this._empty(value) === true) {
       if (this._required === true) {
@@ -103,7 +109,8 @@ export default class Rule {
       return;
     }
 
-    const result = this._check.check(this._field, value, errors, options);
+    const result = this._check
+      .check(this._field, value, errors, options);
 
     if (result !== false && this._cast === true) {
       set(object, this._field, result);
