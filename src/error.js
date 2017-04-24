@@ -6,6 +6,7 @@ export default class ValidatorError extends ScolaError {
 
     this.errors = errors;
     this.message = this._raw();
+    this.stack = new Error(this.message).stack;
 
     this._parse();
   }
