@@ -3,7 +3,7 @@ import RangeCheck from './range';
 export default class EmailCheck extends RangeCheck {
   constructor() {
     super();
-    
+
     this._regex = /^[a-z0-9\-\(\)]+$/i;
     this._domains = null;
   }
@@ -26,7 +26,7 @@ export default class EmailCheck extends RangeCheck {
       return this._error(field, this._createRange(), errors);
     }
 
-    const [local, domain] = value.split('@');
+    const [local = '', domain = ''] = value.split('@');
 
     if (local.length === 0) {
       return this._error(field, 'local', errors);
