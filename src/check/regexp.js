@@ -19,7 +19,7 @@ export default class RegExpCheck extends Check {
     value = String(value);
 
     return this._match.test(value) === true ?
-      value : this._error(field, this._match.source, errors);
+      value : this._error(field, false, errors);
   }
 
   _error(field, reason, errors) {

@@ -37,6 +37,7 @@ export default {
         email: 'be an e-mail address',
         float: 'be a decimal',
         integer: 'be an integer',
+        regexp: 'a valid string',
         string: 'a string'
       },
       invalid_input: 'The input is invalid.'

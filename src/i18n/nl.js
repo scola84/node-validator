@@ -37,6 +37,7 @@ export default {
         email: 'een e-mailadres zijn',
         float: 'een decimaal getal zijn',
         integer: 'een geheel getal zijn',
+        regexp: 'een geldige tekenreeks zijn',
         string: 'een tekenreeks zijn'
       },
       invalid_input: 'De invoer is ongeldig.'
