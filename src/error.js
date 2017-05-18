@@ -11,12 +11,12 @@ export default class ValidatorError extends ScolaError {
     this._parse();
   }
 
-  toString(string = null, fieldPrefix = '', prefix = 'scola.error.') {
+  toString(string = null, prefix = 'scola.error.', fieldPrefix = '') {
     if (string === null) {
       return 'Error: ' + this._raw();
     }
 
-    return this._format(string, fieldPrefix, prefix);
+    return this._format(string, prefix, fieldPrefix);
   }
 
   _raw() {
@@ -26,9 +26,9 @@ export default class ValidatorError extends ScolaError {
       }).join('&');
   }
 
-  _format(string, fieldPrefix, prefix) {
+  _format(string, prefix, fieldPrefix) {
     return Object.keys(this.errors).map((field) => {
-      return this._formatError(string, field, fieldPrefix, prefix);
+      return this._formatError(string, field, prefix, fieldPrefix);
     }).join(' ');
   }
 
@@ -39,7 +39,7 @@ export default class ValidatorError extends ScolaError {
     return field + '=' + reason + ':' + value;
   }
 
-  _formatError(string, field, fieldPrefix, prefix) {
+  _formatError(string, field, prefix, fieldPrefix) {
     let text = '';
     const error = this.errors[field];
 
