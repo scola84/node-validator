@@ -8,15 +8,17 @@ export default class ValidatorError extends ScolaError {
     this.message = this._raw();
     this.stack = new Error(this.message).stack;
 
+    this._prefix.field = '';
+
     this._parse();
   }
 
-  toString(string = null, prefix = 'scola.error.', fieldPrefix = '') {
+  toString(string = null) {
     if (string === null) {
       return 'Error: ' + this._raw();
     }
 
-    return this._format(string, prefix, fieldPrefix);
+    return this._format(string);
   }
 
   _raw() {
@@ -26,9 +28,9 @@ export default class ValidatorError extends ScolaError {
       }).join('&');
   }
 
-  _format(string, prefix, fieldPrefix) {
+  _format(string) {
     return Object.keys(this.errors).map((field) => {
-      return this._formatError(string, field, prefix, fieldPrefix);
+      return this._formatError(string, field);
     }).join(' ');
   }
 
@@ -39,29 +41,29 @@ export default class ValidatorError extends ScolaError {
     return field + '=' + reason + ':' + value;
   }
 
-  _formatError(string, field, prefix, fieldPrefix) {
+  _formatError(string, field) {
     let text = '';
     const error = this.errors[field];
 
-    text += string.format(prefix + 'field.begin', {
-      field: string.format(fieldPrefix + field)
+    text += string.format(this._prefix.string + 'field.begin', {
+      field: string.format(this._prefix.field + field)
     });
 
     const type = Object.keys(error).pop();
-    text += string.format(prefix + 'field.' + type);
+    text += string.format(this._prefix.string + 'field.' + type);
 
     if (typeof error[type] === 'string') {
-      text += string.format(prefix + 'check.' +
+      text += string.format(this._prefix.string + 'check.' +
         type + '.' + error[type]);
     }
 
     if (typeof error[type] === 'object') {
       const detail = Object.keys(error[type]).pop();
-      text += string.format(prefix + 'check.' +
+      text += string.format(this._prefix.string + 'check.' +
         type + '.' + detail, error[type]);
     }
 
-    text += string.format(prefix + 'field.end');
+    text += string.format(this._prefix.string + 'field.end');
 
     return text;
   }
