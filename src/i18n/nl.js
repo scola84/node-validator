@@ -40,7 +40,10 @@ export default {
         regexp: 'een geldige tekenreeks zijn',
         string: 'een tekenreeks zijn'
       },
-      invalid_input: 'De invoer is ongeldig.'
+      invalid_input: 'De invoer is ongeldig.',
+      short: {
+        invalid_input: 'Invoer ongeldig'
+      }
     }
   }
 };

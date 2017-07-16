@@ -40,7 +40,10 @@ export default {
         regexp: 'a valid string',
         string: 'a string'
       },
-      invalid_input: 'The input is invalid.'
+      invalid_input: 'The input is invalid.',
+      short: {
+        invalid_input: 'Input Invalid'
+      }
     }
   }
 };
