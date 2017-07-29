@@ -33,6 +33,8 @@ export default class DateCheck extends RangeCheck {
 
       value = this._date.parse(String(value), this._format,
         options.locale, options.timezone);
+
+      value = value.isValid() ? value.toDate() : null;
     }
 
     if (value === null) {
