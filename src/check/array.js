@@ -24,9 +24,9 @@ export default class ArrayCheck extends Check {
       return true;
     }
 
-    const valid = value.every((entry, index) => {
+    const valid = value.every((entry) => {
       return this._with.some((check) => {
-        value[index] = check.check(field, entry, errors, options);
+        check.check(field, entry, errors, options);
         return typeof errors[field] === 'undefined';
       });
     });
