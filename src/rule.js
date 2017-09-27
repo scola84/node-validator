@@ -103,7 +103,8 @@ export default class Rule {
           required: true
         };
       } else if (this._default !== null) {
-        set(object, this._field, this._default);
+        set(object, this._field,
+          this._default === '\\N' ? null : this._default);
       }
 
       return;
