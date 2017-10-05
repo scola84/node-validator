@@ -98,7 +98,7 @@ export default class Rule {
       object : get(object, this._field);
 
     if (this._empty(value) === true) {
-      if (this._required === true) {
+      if (this._required === true && options.required !== false) {
         errors[this._field] = {
           required: true
         };
